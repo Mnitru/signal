@@ -1,0 +1,386 @@
+Hệ tuyến tính bất biến được đặc trưng bởi đáp ứng xung duy nhất 
+			(Đo h(n) 1 lần duy nhất)
+
+===================                   ==========================
+				   BIẾN ĐỔI Z
+-Biến đổi Z cho phép chúng ta biểu diễn hiệu quả có chiều dài vô hạn ở dạng hữu hạn,
+-Giải quyết 1 loạt vấn đề xảy ra trên miền thời gian
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+I, Đinh nghĩa
+			x(n) ---            ZT              ----> X(Z)
+	x(n): một dãy số                      X(Z): hàm liên tục theo biến Z, Z nhận giá trị phức
+
+	Công thức: X(Z) = 		Σ      ( x(n)z^(-n) )
+					(n=-∞ -> +∞ )
+				= ...+ x(-2) z^(2) + x(1) z^(-1) + x(0) + x(1) z^(-1) +...
+
+BÀI TẬP BIẾN ĐỔI Z CHIA LÀM 2 LOẠI:
+	Tín hiệu vô hạn + Tín hiệu hữu hạn	
++Hữu hạn
+
+x(n)      3
+	2    |
+	|    |
+	|    |                  x(n) ==== ZT =====> X(Z)
+==o===o===o===o===> 
+ -1   0   1   2    n
+
++ Vô hạn (Mục đích chính của ZT)
+
+x1 = a^n * u(n)
+   = { a^n  ,    n>=0;
+     {  0   ,    n<0;
+
+X1(Z) = x1(0) + x1(1).z^-1 + x1(2).z^-2 +...
+      =  1    + a.z^-1     + a^2.z^-2   +...
+      =  1    + a/z  + (a/z)^2  + (a/z)^3
+
+Đặt x = (a/z)
+=========>  S = X1(Z) = 1 + x + x^2 + ....
+		   = {  1/(1-x)  ,   |x| <1
+		     {   ∞       ,   |x| >=1
+
+
+
+Xét z/(z-a) = 1/(1-a/z)  , |a/z| <1 <=> |z| >|a|
+
+|****************************************************************|
+|                                                                |
+|============> a^n.u(n) ====== ZT =======> z/(z-a), |z| >|a|     |
+|                                                                |
+|****************************************************************|
+
+
+Khác với miền thời gian, trên miền Z ko phải biến đổi Z nào cx xác định với mọi Z
+	=====> Cần tìm miền Z để biến đổi Z tồn tại (Miền hội tụ- MHT/ Region of Conversion - ROC)
+	=====> Ngoài tìm công thức, cần chỉ ra miền hội tụ
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+II, Miền hội tụ của biến đổi Z
+*ĐỊNH NGHĨA MIỀN HỘI TỤ:
+  - Là một miền nằm trên mp phức, các điểm Z nằm trong vùng này làm cho biến đổi Z tồn tại.
+  
+  -Ví dụ: (x1 = a^n.u(n) )(*) Miền hội tụ là tập hợp điểm nằm ngoài đường tròn bán kính tâm module =a (Trên không gian ảo)
+  -Ví dụ: x2 = -a^n.u(-n-1) (**)
+		  = { -a^n  , n<=-1      (Phản nhân quả)
+		    {  0    , n>=0        
+ 
+  x2(n) ===== ZT =====> z/(z-a), |z|<|a| , biến đổi Z giống hệt!
+ 	Tuy nhiên miền hội tụ lại khác, là tập hợp các điểm trong đường tròn có bán kính module= a
+
+
+*NHẬN XÉT: 
+	- Với tín hiệu phản nhân quả, trên miền thời gian chỉ có các mẫu nằm bên trái (Mẫu thứ 0 != 0), 
+		thì biến đổi Z có miền hội tụ nằm trong đường tròn. (Ngoài là nhân quả)
+	- Tín hiệu x1 và x2 khác nhau hoàn toàn trên miền thời gian, song có cùng công thức biến đổi Z
+		khác nhau nằm ở miền hội tụ.
+----------> 1 Biến đổi Z có thể tương ứng với nhiều tín hiệu trên miền thời gian
+		 Cần biết thêm thông tin miền hội tụ để xác định duy nhất tín hiệu trên miền thời gian
+
+	- Bán kính của đường tròn = a, là nghiệm của mẫu (z-a =0), đây được gọi là ĐIỂM CỰC của biến đổi Z
+	  Nghiệm của tử số làm cho biến đổi Z = 0, nên gọi là điểm 0
+
+====> TỔNG QUÁT: Với 1 ZT bất kỳ, 
+			MHT: Rx-<=|Z|<=Rx+ (Hình vành khuyên trong đường tròn)
+Với Rx+ = +∞, MHT nằm ngoài vòng tròn
+Với Rx- = 0,  MHT nằm trong vòng tròn
+Với Rx->Rx+---> MHT không tồn tại
+
+-----------> ĐƯỢC SỬ DỤNG x1 và x2  ( (*),(**)  check phần trên) ĐỂ TÍNH ZT PHỨC TẠP
+
++++++++++++++++++++++++++++++++++++++++++++++++
+
+III,  Các tính chất
+1, Tính tuyến tính
+		x(n) = a.x2(n) + b.x2(n) == ZT ===> X(Z) = a.X1(Z) + b.X2(Z)
+
+VD:      x(n) = 2.3^n.u(n) +4.5^n.u(n)
+                    |          |
+                    |          |
+                    V          V   
+== ZT ===> X(Z) = 2z/(z-3) + 4z/(z-5) , |Z| >5
+                  (|Z| >3)      (|Z|>5)
+
+		X(Z) = ..Quy đồng =... ,|Z| >5
+
+--> Tuyến tính rất hữu ích: Biến đổi Z ngược  (Invert Z Transform)
+	IZT: Cho X(Z) vào MHT, xác định x(n)
+----------->Giải pháp: Phân tích X(Z) thành tổ hợp tuyến tính các hàm cơ bản
+				 Tra bảng IZT của thành phần cơ bản
+				-> Tỏng hợp lại được x(n)
+
+2, Tính chất trễ 
+ Ý nghĩa: Cho phép tính biến đổi của Z tại tín hiệu trẽ 
+				x(n)  === ZT ===> X(Z)
+
+			   x(n-n0) === ZT ===> Z^(-n0).X(Z)
+
+VD: x(n) = a^n.u(n) == ZT ==> X(Z) = z/(z-a),  |z|>|a|
+x(n-1) = a^(n-1) .u(n-1)
+       = { a^(n-1), n >= 1  == ZT ===> z^(-1).z/(z-a) =1/(z-a) , |z| >|a|
+       = { 0      , n < 1
+
+=======> NHẬN XÉT: 
+	- Tính chất trễ ko làm thay đổi miền hội tụ của Z
+	- Biễn đổi Z của a^(n-1).u(n-1) cũng gọi là biến đổi cơ bản (ko cần chứng minh lại)
+          
+		
+		 ---------> -a^n.u(-n-1) === ZT ===> X(Z) = z/(z-a), |z| <|a|
+               -----------------------------------------------------------
+****Khi đề bài ko cung cấp thông tin về tín hiệu, phải xét 3 trường hợp (Nhân quả, phản nhân quả, không nhân quả)
+
+
+****
+BT: Tìm x(x) biết (IZT):
+
+	X(Z) = (z^2 +5z)/(z^2-3z+2) 
+
+-Bước 1: Tìm n0 của mẫu số: (z-2)(z-1) = 0 => 2 nghiệm z=1 và z=2 
+-Bước 2: Biểu diễn lại X(Z) dưới dạng tổ hợp tuyến tính của các hàm X(Z) cơ bản 
+  	    
+		X(Z) = (z^2 +5z)/(z^2-3z+2) = a*z/(z-1) + b*z/(z-2)
+-Bước 3:     (a+b)z^2 + (-2a-b)z = z^2 +5z
+
+		==>{a= -6
+		   {b= 7
+-Bước 4: Tìm MHT để tìm IZT [ 2 đường tròn tâm (0,0) bán kính 1,2 ]
+	+Phần trong đường tròn có bán kính = 1, 
+					|z|<1
+		=> x(n) = 6(1^n)u(-n-1) - 7.2^n. u(-n-1)
+	
+	+Phần nằm giữa đường tròn có bán kính =1 và =2 
+				    1<|z|<2
+		=> x(n) = -6u(n) -7.2^n.u(-n-1)
+	
+	+Phần nằm ngoài đường tròn có bán kính =2
+					|z|>2
+		=> x(n) = -6u(n) +7.2^n.u(n)
+
+===> Nếu đề bài cho trước x(n) là nhân quả ---> Chỉ xét trường hợp |z|>2
+	Tìm biến đổi IZT, phương pháp chúng ta vừa được học gọi là phân tích thành các thừa số hữu tỷ cơ bản. 
+					Sau khi phân tích xong, sử dụng lại tính chất tuyến tính của biến đổi Z để tìm lại x(n)
+
+*** 
+BT: Tìm IZT nhân quả của biến đổi Z sau:
+		X(Z) = (z+6)/(z^2-7z+12) ===== IZT ====> x(n) (Nhân quả)
+
+	  		= a.1/(z-3) +b.1/(z-4)
+
+a = X(Z) (z-3)--- z=3 ----> a= -9
+b = X(Z) (z-4)--- z=4 ----> b= 10 
+
+	X(Z) = -9/(z-3) +10/(z-4)
+
+X(Z) ==== IZT/ NQ ====> x(n) = -9.3^(n-1) + 10.4^(n-1) .u(n-1)
+
+*******
+
+3, Tính chất đạo hàm 
+    y(n) = nx(n) === ZT ===> Y(Z) = -Z.X'(Z)
+
+Tính chất đạo hàm đc sử dụng để xử lý x(n) có nghiệm kép/bội 
+VD: X(-Z) = 1/(z-a)^2  === IZT/NQ ===> x(n) =
+	a^(n-1) .u(n-1) === ZT ===> 1/(z-a) , |z| > |a|
+	n.a^(n-1) .u(n-1) === ZT ===> -z (1/(z-a))' = z/(z-a)^2, |z| > |a|
+
+++++++++++++++++++++++++
++ (n-1).a^(n-2).u(n-2) +  ==== ZT ===> z^(-1) . z/(z-a)^2 = 1/(z-a)^2, |z| >|a|
+++++++++++++++++++++++++
+
+				(Không được sử dụng trực tiếp)
+4, Tính chất tổng chập
+***Với các tín hiệu có chiều dài vô hạn trên miền thời gian thì tính chất này hiệu quả
+Thường dùng hệ thống truy hồi bởi hệ thống này có chiều dài vô hạn
+
+	y(n) = x(n) * h(n) === ZT ===> Y(Z) = X(Z) x H(Z)
+Biến đổi Z cho phép biến đổi bài toán phức tạp tổng chập trên miên thời gian thành bài toán đơn giản vs phép nhân đa thức trên miên Z 
+		Cách thức giải quyết phép chập phực tạp trên miền n
+ 			
+			x(n) === ZT ==> X(Z) 
+			h(n) === ZT ==> H(Z)
+			Y(Z) = X(Z).H(Z) 
+			Y(Z) === IZT ===> y(n)
+ 5, Tính chất tỷ lệ 
+		y(n) =  a^n.x(n) === ZT ===> Y(Z) = X(Z/a)
+
+
+
+
+============================                            ==============================
+					KHẢO SÁT HỆ THỐNG TRÊN MIỀN Z
+                     =============
+                     |           | 
+          x(n) ====> |   h(n)    | ====> y(n)
+                     |           |
+                     =============
+
+Với hệ thống truy hồi h(n) có chiều dài vô hạn ----> Sử dụng biến đổi Z để khảo sát
+
+Khảo sát: Tính nhân quả   +    Tính ổn định
+	Phương trình sai phân đệ quy ---> h(n) ---> H(Z) 
+			x(n) --> h(n) ---> y(n) = x(n) * h(n)
+			X(Z) --> H(Z) ---> Y(Z) = X(Z) * H(Z) 
+
+H(Z): Hàm truyền của hệ thống: Đăc trưng của hệ thống cho tính bất biến trên miền Z
+
+
+I, Hàm truyền đạt 
+				h(n) === ZT ===> H(Z) 
+				H(Z) === ZT ===> h(n)
+
+VD: y(n) -5y(n-1) +6)(y-2) = 2x(n) +3x(n-1)     (Hệ thống nhân quả)
+	Tìm hàm h(n)?
+
+
+Thông qua H(Z)
+Biến đổi Z:
+	Y(Z) -5Z^(-1).Y(Z) + 6Z^(-2). Y(Z) = 2X(Z) +3Z^(-1)X(Z)
+	Y(Z) (1-5Z^(-1) +6Z^(-2)) =X(Z) (2+3Z^(-1))
+
+	H(Z) =Y(Z)/X(Z) = (2Z^2+3Z)/(Z^2-5Z+6)
+
+========> Tìm h(n) là IZT của H(Z) thì phân tích thừa số như trên 
+
+II, Khảo sat tính nhân quả và ổn định
+-h(n) = 0, mọi n<0 ---> Rh+ ---> ∞
+
+-	Σ      | h(n) |  < c < +∞
+(n=-∞ -> +∞ )	
+
+
+|H(z)| = 	| 	Σ       h(n).z^(-n) |  <=  	Σ      | h(n).z^(-n) |  =   	Σ      | h(n)||z^(-n)| 
+		(n=-∞ -> +∞ )             (n=-∞ -> +∞ )                     (n=-∞ -> +∞ )
+
+==== Với |z| =1 |H(Z)| =  	Σ      | h(n)|    <   ∞
+		            (n=-∞ -> +∞ )
+			
+			Rh- <1 < Rh+
+			
+	===========> Module hàm H(Z) hữu hạn
+		========> Để hệ ổn định, MHT phải chứa đường tròn đơn vị 
+			=====> Hệ ổn định + Nhân quả Rh+ -> +∞
+		
+		Để kiểm tra hệ ổn định và nhân quả một cách tự động, ta kiểm tra các điểm cực hàm H(Z) (điểm làm cho mẫu của H(Z) =0)
+		Tại các điêm cực, hàm H(Z) ko xác định, tức là các điểm cực phải nằm ngoài (ko thuộc) miền hội tụ
+--------------> Hệ nhân quả và ổn định khi các điểm cực nằm trong đường tròn R= Rh- |z_cực|<1
+ 							Nếu |z_cực|>1, hệ ổn định và ko nhân quả
+
+BT:
+a, y(n) -3y(n-1) +2y(n-2) = 4x(n) +5x(n-1)
+b, y(n) -3y(n-1) +2y(n-2) = x(n)
+c, y(n) -3/4 y(n-1) + 1/8 y(n-2) = x(n)
+d, y(n) -4y(n-1) +5y(n-2) = x(n)
+
+Tìm H(z), điểm cực của H(z), vẽ trên mặt phẳng phức, để nhận xét tính ổn định và tính nhân quả của hệ
+
+--------------------------------------------------------------
+III, Sử dụng biến đổi Z giải phương trình sai phân
+1, Biến đổi Z một phía (ZT+)
+  a, ĐỊnh nghĩa: X+(Z) = 	Σ      x(n).z^(-n)
+			      (n=0 -> +∞ )	
+Tín hiệu x(n) là tín hiệu nhân quả <=> x(n) =0, mọi n<0
+	-----> Biến đổi Z 2 phía hay 1 phía đối vs tín hiệu nhân quả là như nhau 
+  b, 1 số tính chất 
++ Tính chất trễ
+	x(n)  ======= ZT+ ======> X+(Z)
+	 
+	x(n-1) ====== ZT+ ======> Z^-1.X+(Z) + x(-1)
+
+	x(n-2) ====== ZT+ ======> Z^-2.X+(Z) + x(-2) + x(-1).Z^-1
+
+2, Giải PT sai phân 
+	Bài toán: Cho PTSP biểu diễn hệ thống cho x(n)  (n>=0), cho đk khởi tạo ban đầu của hệ thống (y(n-1), y(n-2),...) 
+	Tính y(n) (n>=0) 
+
+	Khởi tạo relax
+		y(n) -ay(n-1) = x(n) (Khởi tạo relax)
+		
+======>    Y+(z) -a(z^-1y+(z) + y(-1)) = X+(z) 
+		Y+(z)[1-a.Z^-1) = X+(z) + a.y(-1)
+		Y+(z) = (X+(z) + a.y(-1)) / (1-a.z^-1)
+
+		      = X^-1(z).z/(z-a) + a.y(-1).z/(z-a) (*)
+3, Biến đổi Z ngược 1 phía
+	Đặt Y+(Z) ==== IZT+ ====> y(n)
+IZT 1 phía và IZT là giống nhau
+
+
+(*) ==> X+(Z)Z/(Z-a)   +   a.y(-1).z/(z-a)
+		 |			   |
+		 |			   |
+		 |			   |
+		 ZT+			   ZT+
+		 |			   |
+		 V			   V
+		yZS (n)           yZI(n)	  
+
+
+yZS chỉ phụ thuộc vào kích thích của n mà ko phụ thuộc vào điều kiện ban đầu của hệ thống
+YZS được gọi là đáp ứng trạng thái 0
+
+Định nghĩa: Đáp ứng trạng thái 0 là đáp ứng của hệ thống khi điều kiện ban đầu của hệ thống =0
+	Do phải có tín hiệu vào mới có yZS(n), nên YZS được gọi là đáp ứng ép buộc 
+
+-Thành phần phụ thuộc ban đầu của hệ thống là YZI, gọi là thành phần đầu vào 0
+
+--------------------------------
+
+	x(n) = u(n)  }  ===> y(n)
+	y(1) = gamma } 
+		
+			Y+(Z) = X+(Z)Z/(Z-a) + a.y(-1)Z/(Z-a) 
+Tìm yZS+(n)
+	x(n) = u(n) === ZT+ ===> X+(Z) =  z/(z-1) , |z| >1
+	YZS+ = z/(z-1) . z/(z-a) = z^2/(z-1)(z-a) = alpha.z/(z-1) + beta.z/(z-a)
+
+{ alpha + beta = 1     ===> {alpha = 1/(1-a)
+{ a.alpha +beta = 0         {beta = -a/(1-a)
+
+			
+		   ++++++++++++++++++++++++++++++++++++++++++++++++ 
+		   +				                        +
+==>IZT+	   +	yZS(n) = 1/(1-a).u(n) - a/(1-a) . a^n.u(n) + 
+		   +                                              +
+		   ++++++++++++++++++++++++++++++++++++++++++++++++  	
+
+Tìm y+Zi(n)
+    
+	Y+Zi(Z) = a. gamma.z/(z-a) 
+
+
+	   +++++++++++++++++++++++++++++++++
+         +	                            +
+===>IZT+ + yZi(n) = a.gamma.a^(n+1).u(n) +
+         +                               +
+	   +++++++++++++++++++++++++++++++++	
+
+
+	y(n) = yZS(n) + yZi(n)
+		
+                ++++++++++++++++++++++++++++++++++++++++++++++++++
+		  +                                                 +
+		= +	(1-a^(n+1))/(1-a) . u(n) +gamma.a^(n+1).u(n) +
+               +                                                 +
+               +++++++++++++++++++++++++++++++++++++++++++++++++++
+
++ a<1 n->+∞ yZi(n) nhỏ lại
+ n=0 n đủ lớn để yZi(n) đủ bé: giai đoạn quá độ
+		y(0) = (1-a)/(1-a) + y(-1).a
+		     = 1 + a.y(-1)
+
++ n->+∞    a/(1-a) .a^n.u(n) -> 0
+		-----------------
+                   |
+                   v
+		  Đáp ứng tắt dần 
+		
+	1/(1-a): Đáp ứng trạng thái bền
+			
+
+
+ 
+
+	
+		
