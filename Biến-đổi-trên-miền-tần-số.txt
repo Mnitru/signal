@@ -1,0 +1,534 @@
+		        BIỂU DIỄN TÍN HIỆU TRÊN MIỀN TẦN SỐ 
+II, Phân tích tần số
+- Ý tưởng: Phân tích tín hiệu thành tổ hợp tuyến tính các hàm lượng giác:
+		 x(t) = A1cos(ω1.t+φ1) + A2cos(ω2.t+φ2)
+- Các thành phần tần số lượng giác được đặc trưng bởi tần số góc ω và pha φ
+- Cách biểu diễn trên được gọi là cách biểu diễn tín hiệu trên miền tần số 
+		(Phổ tần số)
+- Biểu diễn phổ tần số cần vẽ 2 đồ thị: Phổ biên độ và phổ góc pha
+	Phổ biên độ:
+
+	  A	^  A1
+           |  |   A2
+           |  |   |
+           |  |   |
+           |  |   |
+        =====================>     
+          0|  ω1  ω2         ω
+           | 
+	Phổ pha 
+        φ  ^  
+           |      φ2
+           |  φ1  |
+           |  |   |
+           |  |   |
+        =====================>     
+          0|  ω1  ω2         ω
+           | 
+Công thức Euler 
+		Z = cosφ + j.sinφ = e^(jφ)
+		Z = cosφ - j.sinφ = e^(-jφ)
+
+	Re(e^(jφ)) = cosφ = 1/2 . e^(jφ) + 1/2 . e^(-jφ)
+
+III,Phân tích phổ cho tín hiệu liên tục 
+1, Tín hiệu liên tục trừu tượng
+
+
+
+Dặc điểm tín hiệu liên tục tuần hoàn chu kỳ Tp : Nó chỉ bao gồm thành phần tần số là số nguyên lần của thành phần tần số cơ bản
+-Tần số cơ bản: Fo = 1/Tp   , ω0 = 2piFo = 2pi/Tp
+ Các thành phần tần số khác Fk = k.Fo = k/Tp
+					ωk = 2pi.kFo = 2pi.k/Tp
+* Vậy để PT phổ của tín hiệu liên tục tuần hoàn, cần xác định các thành phần tần số, sau đó xác định 2 tham số đặc trưng (phổ A, phổ φ)
+* Do các thành phần tần số là bội lần số nguyên lần tần số cơ bản 
+		A0,A1,A2... }
+		φ0,φ1,φ2... }    rời rạc  ========> Phổ rời rạc 
+
+
+Như vậy, ta có công thức Fourier
+====================================================================================
+	x(t) = 	Σ      ck.e^(j.ωk.t)                          (PT tổng hợp)  (1)
+		(k=-∞ -> +∞ )
+
+	ck = 1/Tp .∫ x(t).e^(j.ωk.t) dt = Ak.e^(j.φk.t)           (Pt phân tích) (2)  
+		     Tp
+====================================================================================
+
+ck là số phức, lấy |ck| = A , lấy pha của k sẽ ra được ω của k
+
+BÀI TẬP:
+PT phổ cuả tín hiệu xung vuông liên tục tuần hoàn 
+a, Tính ck
+b, Vẽ phổ
+c, Nhận xét mối quan hệ giữa cách biểu diên tín hiệu trên miền tần số/ thời gian
+d, Nhận xét sự thay đổi phổ tín hiệu khi:
+	- Cố định To, tăng Tp lên gấp đôi
+	- Cố định To, giảm Tp 1 nửa
+e, Nhận xét sự thay đổi phổ tín hiệu khi:
+	- Cố định Tp, tăng To gấp đôi
+	- Cố định Tp, giảm To 1 nửa
+
++++++++++++++++
+              Tp/2
+a, ck = 1/Tp .∫     x(t).e^(j.ωk.t) dt
+		  -Tp/2
+
+		   Tô/2                                   Tô/2
+	= 1/Tp .∫     A.e^(j.ωk.t) = 1/Tp . 1/(-j.ωk.t) ∫   A.e^(j.ωk.t) d(j.ωk.t)
+		  -Tô/2                                  -Tô/2
+
+	                                 |Tô/2
+	= A/Tp . 1/(-j.ωk.t) . e^(j.ωk.t)|      
+	                                 |-Tô/2 
+
+	= A/Tp . 1/(-j.ωk.t) . (e^(-j.ωk.t.Tô/2) - e^(j.ωk.t.Tô/2))
+					  ---------------
+							|
+							v
+					 -j.2sin(ωk.Tô/2)		
+						
+	= A/Tp . 1/ωk . 2sin(ωk.Tô/2)
+
+
+       ++++++++++++++++++++++++++++++++++++++++++++++
+       +                                            +
+======>+  ck =  A/Tp . 1/(k.pi.Fo) .sin(k.pi.Fo.Tô) +
+       +                                            +
+       ++++++++++++++++++++++++++++++++++++++++++++++              
+ck ở đây là số THỰC, ck>0 , Ak = ck, pha =0
+			     ck<0 , Ak = -ck, pha = pi
+======> Chỉ cần vẽ đồ thị cho ck, ko cần vẽ riêng 2 đồ thị A và pha
+
+b,
+
+	=====> ck = A.Tô/Tp . sin(k.pi.Fo.Tô)/k.pi.Fo.Tô
+		
+k = Fo.Tô  ∼ φ
+
+`
+Fo = 1/Tp = 1/0.25 = 4Hz
+
+c, Nhận xét
+- Có hình dạng sinφ/φ
+- Có 1 búp song chính và búp sóng phụ
+- Búp sóng chính có biên độ: A.Tô/Tp, độ rộng = 2k.pi.Fo.Tô 
+- Búp sóng phụ, biên độ giảm dần, độ rộng = 1 nửa búp chính = 1/Tô
+- Khoảng cách giữa các vạch phổ: Fo = 1/Tp
+
+e, Cố định chu kỳ giảm độ rộng xung 1 nửa: Đồ thị vẫn có hình dạng sinφ/φ
+- Búp sóng chính: Biên độ giảm 1 nửa, độ rộng tăng gấp đôi
+- Búp sóng phụ: Biên độ cũng giảm 1 nửa, giảm dần, độ rộng tăng gấp đôi
+- Khoảng cách giữa các vạch tần số/phổ:Giữ nguyên (Giữ nguyên Tp)
+
+d, Cố định Tô, tăng Tp gấp đôi: Đồ thị vẫn có hình dạng sinφ/φ
+- Búp sóng chính: Biên độ giảm 1 nửa, độ rộng giữ nguyên 
+- Búp sóng phụ: Biên độ giảm 1 nửa, giảm dần, độ rộng giữ nguyên 
+- Khoảng cách giữa các vạch tần số: Giảm 1 nửa (Nhiều vạch tần số hơn)
+
+(*) Tp ->∞, tín hiệu xung vuông tuần hoàn x(t) sẽ chỉ còn 1 xung vuông duy nhất, và x(t) trở thành tín hiệu liên tục nhưng không tuần hoàn 
+		Khoảng cách giữa cách vạch phổ -> 0 ====> Đồ thị phổ liên tục / vô hạn thành phần tần số
+
+============
+Với ck thực:
+- Số phức liên hợp của ck
+		 	         
+			ck* =	1/Tp .∫     x*(t).e^(j.ωk.t) dt
+		  			Tp
+
+		 	          
+			ck* =	1/Tp .∫     x(t).e^(-j.ω(-k).t) dt
+		  			Tp
+				
+				= c(-k)
+
+Số phức ck = |ck|. e^(j.θk)
+	-> Số phức liên hợp ck* = c(-k) = |ck|. e^(-j.θk)
+
+Viết lại PT tổng hợp:
+			x(t) = 	c0.e^(j.ωk.t) +		Σ       ck.e^(j.ωk.t)  +		Σ           ck.e^(j.ωk.t)                         
+								(k=1 -> +∞ )                        (k=-∞ -> -1 )
+
+				= C0   +  		Σ       |ck|.e^(j.θk).e^(j.ωk.t)  +		Σ           c(-k).e^(j.ωk.t)                          
+						(k=1 -> ∞)                         		(k=1 -> ∞)
+				
+				= C0   +  		Σ       |ck|.e^(j.θk).e^(j.ωk.t)  +		Σ           |ck|.e^(-j.θk).e^(-j.ω(-k).t)                          
+						(k=1 -> ∞)                         		(k=1 -> ∞)
+
+				
+				= C0   +  		Σ       |ck|.  [ e^(j.(θk+ωk.t)) + e^(-j.(θk+ωk.t))]  
+						(k=1 -> ∞)
+
+Do e^(-jφ) + e^(jφ) = 2cos(φ) 
+
+=================================================================
++                                                               +		
++		x(t) = c0 + 	 Σ       2|ck| cos(ωk.t + θk)        +
++				   (k=1 -> ∞)                             +
+=================================================================
+
+
+- Công thức trên đc gọi là chuỗi Fourier cơ bản thứ I biểu diễn tín hiệu liên tục tuần hoàn
+- Công thức này đc biểu diễn hoàn toàn số thực, nên dễ dàng tính toán đc tín hiệu thực x(t)
+- c0 là thành phần 1 chiều nằm trong tín hiệu ứng với thành phần tần số 0
+- Các hàm lượng giác còn lại tương ứng với các thành phần tần số ω,A trong tín hiệu
+		cos(a+b) = cos(a).cos(b) -sin(a).sin(b)
+
+==================================================================
++                                                                +
++	x(t) = c0 + 	Σ       [ ak.cos(ωk.t) -bk.sin(ωk.t) ]     +                      
++			 (k=1 -> ∞)                                     +
+==================================================================
+
+
+Với ak = 2|ck|cos(θk), bk = 2|ck|sin(θk)
+
+
+2, Tín hiệu liên tục không tuần hoàn 
+
+x(t) = {    A,  -Tô/2 <=  t  <= Tô/2   
+       {	 0,    t còn lại
+
+*Đặc điểm:   
+- Phổ liên tục (Liên tục các thành phần tần số)
+- Phổ của tín hiệu này được ký hiệu: X(F)  ( X(ω) )
+		
+		x(t) ------ FT ------> X(F) =      ∫         x(t).e^(-j.2.pi.F.t)  dt         (PT phân tích)
+							   (t=-∞ -> +∞)
+
+           X(F) ------ IFT -----> x(t) =      ∫         X(F).e^(-j.2.pi.F.t)  dF          (PT tổng hợp)
+							  (F=-∞ -> +∞)
+********* Khi PHÂN TÍCH PHỔ CỦA TÍN HIỆU XUNG VUÔNG:
+	- Xác định X(F)
+	- Vẽ X(F)
+	- Tìm mối quan hệ X(F), x(t)
+	- Mô tả sự thay đổi của phổ X(F) khi Tô giảm 1 nửa
+
+VD:
+x(t) = {    A,  -Tô/2 <=  t  <= Tô/2   
+       {	 0,    t còn lại
+
+X(F) =   ∫         x(t).e^(-j.2.pi.F.t)  dt   =   ∫             A.e^(-j.2.pi.F.t)  dt       
+	(t=-∞ -> +∞)                            (t=-Tô/2 -> Tô/2)
+
+	=   A/(-j.2.pi.F.t)           ∫            e^(-j.2.pi.F.t)  d(-j.2.pi.F.t)       
+	           		  (t=-Tô/2 -> Tô/2)
+
+                                             |Tô/2
+      = A/(-j.2.pi.F.t) .e^(-j.2.pi.F.t)     |
+                                             |-Tô/2
+
+	= A/(-j.2.pi.F.t) (  e^(-j.2.pi.F.Tô/2) - e^(-j.2.pi.F.(-Tô/2))  )
+
+	= A/(-j.2.pi.F.t) (-2j.sin(pi.F.Tô) )
+
+	= A/(pi.F) .sin(pi.F.Tô) 
+
+     		=====================================
+     		|                                   |
+X(F) =	|     A.Tô sin(pi.F.Tô)/(pi.F.Tô)   |               
+     		|                                   |
+     		=====================================
+
+***Nhận xét mối quan hệ: 
+		- x(t) chỉ có duy nhất 1 xung vuông, biên độ A, độ rộng Tô
+		- Phổ X(F) có hình dạng sinφ/φ gồm 1 búp sóng chính và các búp sóng phụ
+			+ Búp sóng chính có độ rộng 2/Tô (Hz) 
+			  . Biên độ của búp sóng chính A.Tô
+			+ Búp sóng phụ độ rộng 1/Tô (Hz) 
+			  . Biên độ giảm dần
+		- Thông tin chủ yếu nằm trong thành phần tần số thấp, tần số càng cao biên độ càng giảm (Năng lượng càng giảm)
+		- Khi Tô giảm 1 nửa:
+			+Búp sóng chính: Độ rộng tăng 2 lần
+				. Biên độ giảm 1 nửa
+			+Búp sóng phụ: Độ rộng tăng 2 lần
+				. Biên độ giảm dần
+
+3, Tín hiệu rời rạc không tuần hoàn 
+
+
+x(n) ---------- DTFT ----------> X(ω) =    Σ          x(n). e^(j.ω.n)           (Công thức phân tích) 
+						       (n=-∞ -> +∞)
+
+							(ω = 2.pi.f)
+
+DTFT: Discrete Time Fourier Transform 
+
+****** Nhận xét: ω liên tục --> Phổ liên tục, tuần hoàn với chu kỳ 2pi
+		- Tín hiệu liên tục thì phổ không tuần hoàn và ngược lại 
+		- Tín hiệu tuần hoàn thì phổ không liên tục và ngược lại 
+		- Phổ đã tuần hoàn thì chỉ cần tính cho 1 chu kỳ 
+		- X(ω) là số phức thì ta có thể vẽ biên độ và pha riêng
+
+
+X(ω) ------- IDTFT ------------> x(n) = 1/2pi .     ∫            X(ω) .e^(j.ω.n) .dω  (Công thức tổng hợp)       
+								   (ω=-pi -> +pi)
+
+VD: Tính phổ X(ω), vẽ phổ biên độ và phổ pha của các tín hiệu sau 
+a, x(n) = σ(n-1) 
+		Số phức z= a+j.b
+		Khi liên hợp, chuyển X(ω) vè dạng:
+			X(ω) = A(ω). e^(j.θ(ω) ) 
+	
+	A(ω), θ(ω) là các hàm số thực theo ω
+		Biên độ của X(ω): | X(ω) | = | A(ω) |
+		Pha của X(ω): arg(X(ω)) = { θ(ω) nếu A(ω)>0
+						    { θ(ω) +- pi nếu A(ω)<0
+
+
+x(n) ----- DTFT ----> X(ω) =     Σ          x(n). e^(-j.ω.n)        =  e^(-j.ω)
+				       (n=-∞ -> +∞)
+
+    -----> { A(ω) = 1
+           { θ(ω) = -ω
+
+
+                 |A(ω)|
+              ^
+              | 1
+--------------|--------------------
+       |      |          |                     
+       |      |          |                      
+===================================>
+      -pi     | 0        pi        ω           
+
+
+b, x(n) = rect3(n)
+
+
+* Phương pháp phân tích phổ của tín hiệu rời rạc không tuần hoàn (rời rạc hóa theo ω)
+
+
+
+       ω0          ω1                         ωN
+------ | --------- | ------------------------ | ------->
+       0                                      2.pi
+
+       ===========================================        
+       +                                         +
+====>  +    ωk = 2.pi.k/N                        +
+       +		   (N: thành phần tần số)        +
+       =========================================== 
+
+
+X(ωk) =     Σ          x(n). e^(-j.ωk.n)          
+	  (n=-∞ -> +∞)
+
+Việc lựa chọn N phụ thuộc vào tín hiệu có chiều dài hữu hạn M sao cho N=M
+
+
+@@@ Phép biến đổi Forier rời rạc: (DFT - Discrete Forier Transform)
+
+============================================================
++                                                          +
++ X(k) =	  	Σ          x(n). e^(-j.2.pi.k.n /N)        +    
++	     (n=0 -> N-1)                                     +
++                                                          +
+============================================================
+
+********** Tránh nhầm lẫn với DTFT
+
+@@@ Phép đảo IDFT
+============================================================
++                                                          +
++ X(k) =	  	Σ          x(n). e^(-j.2.pi.k.n /N)        +    
++	     (n=0 -> N-1)                                     +
++===========================================================
+
+
+ 
+********** Độ phức tạp O(N^2)
+
+VD: x(n) = rect_3(n)
+a, Tính DFT với N=4
+b, Tính DFT với N=8 và so sánh với DTFT
+
+Giải
+a,DFT của x(n) =rect_3(n) chọn N=4,8                          ===== ω0 ====== ω1 ====== ω2 ===== ω3 ======= | ==============>
+	Input x(n),  n=0,1,2,....,N-1                                 0         -pi/2     pi       3pi/2      2.pi            ω
+	Output X(k), k=0,1,2,....,N-1
+		=====> X(ωk) với ωk = 2.pi.k/N
+
+
+Tại k=0, X(0) = 	  	Σ          x(0). e^(-j.0.n)  =  x(0) + x(1) + x(2) +x(3) =3            
+	            (n=0 -> 3)                                     
+
+Tại k=1, X(1) = 	  	Σ          x(n). e^(-j.2pi.1.n/N)  = 1.e^0 + 1.e^-1 + 1.e^(-j.pi)            
+	            (n=0 -> 3)                                     
+
+              =  1 + cos(pi/2) -j.sin(pi/2) + cos(pi) -j.sin(pi) = 1-j -1 = -j
+
+Tại k=2, X(2) = 	  	Σ          x(n). e^(-j.pi.n)  = 1 + e^(-j.pi) + e^(-j.2pi) = 1
+	            (n=0 -> 3) 
+
+Tại k=3, X(3) =  j
+	
+			=========>   ω0 = 0,            X(0) = 3
+					  ω1 = pi/2,         X(1) = -j
+					  ω2 = pi,           X(2) =	-1
+					  ω3 = 3pi/2,        X(3) =j	
+
+  ^  | X(ω)|                     3
+  |                                
+3 -     1        1       1       |
+  |                              |
+  |     |        |       |       |
+  |     |        |       |       |
+==|=====|========|=======|=======|=============>
+ 0| 	  pi/2     pi      3pi/2    2pi          ω
+
+
+ ^  arg X(ω)         pi/2
+ |   
+ |                    |
+ |                    |
+ |   pi/4             |
+ |                    |    
+=|====|=======|=======|==========|=======>
+0|    |       pi     3pi/2       2pi     ω
+      |
+     
+    -pi/2
+
+
+
+=====================================================================================================================================================
+						BIỂU DIỄN HỆ THỐNG RỜI RẠC TRÊN MIỀN TẦN SỐ
+
+1, Định nghĩa
+- Các biểu diễn hệ thống trên miền tần số là biểu diễn x(n) dưới dạng tổ hợp của các thành phần tần số (Các hàm lượng giác sin/cos)
+ Chúng ta tìm hiểu khi thành phần tần số đi vào hệ thống thì đầu ra tương ứng là gì? Hệ thống có biến đổi thành phần tần số hay không?  
+
+*******Các hệ thống chúng ta đang xem xét là tuyến tín bất biến cho nên ta sẽ xét cho các thành phần tần số riêng lẻ, 
+			còn đầu ra của tín hiệu hệ thống chỉ cần lấy tổng thành phần đầu ra tương ứng
+
+Chúng ta  + xét: x(n) = A0 .cos(ω0.n + φ0)
+          + hệ thống biến đổi tín hiệu này ntn? (về A,φ,ω)
+
+	x(n) = A0.e^(j.(ω0.n+ φ0) ) = A0.e^(j.ω0.n) . e^(j.φ0)
+
+
+y(n) = x(n) * h(n) =	 Σ         h(k) .x(n-k)  =    Σ         h(k). e^(-j.ω(n-k))
+	              (k=-∞ -> ∞)                  (k=-∞ -> ∞)       -----------
+                                                                        |
+     =  e^(j.ω0.n) [  Σ         h(k). e^(-j.ω0.k)  ]                    |
+	              (k=-∞ -> ∞)                                         v
+                  --------------                                   e^(-j.ω0.k) . e^(j.ω0.n)
+                      |   
+                      |
+                      |
+                      v
+                    H(ω0)
+
+H(ω0) là biến đổi Forier của đáp ứng xung ở tần số ω0
+Ký hiệu R(ω0) là biên độ của H(ω0) 
+        φ(ω0) là pha của H(ω0)
+         
+	=====> H(ω0) = R(ω0. e^(j.φ(ω0) )
+
+x(n) = e^(j.ω0.n)
+y(n) = e^(j.ω0.n) R(ω0. e^(j.φ(ω0) )
+
+
+          =======================================================
+          +                                                     +
+========> +  x(n) = A0. e^(ω0.n + φ0)                           +
+          +  y(n) = A0.R(ω0).e^(j.ω0.n) . e^(j.φ0) .e^(φ(ω0))   +
+          +	  = A0.R(ω0).cos(ω0.n + φ0 + φ(ω0) )            +
+          ======== *********** ======== ********** ==============
+                     |                      |
+                     |                      |
+                     |                      |
+                     V                      V
+                Đáp ứng biên độ        Đáp ứng pha
+
+
+
+***** NHẬN XÉT: 
+	- Tín hiệu ra chỉ có 1 tần số giống tín hiệu vào cho nên các hệ thống số có tính chât bảo toàn các thành phần tần số
+	- Hệ thống thay đổi biên độ của thành phần tần số 1 lượng tỉ lệ R(ω0) ( thay đổi số lần R(ω0) )
+	- Hệ thống thay đổi góc pha của thành phần tần số 1 lượng φ(ω0) (thay đổi +/- φ(ω0) )
+
+
+*** Định nghĩa
+	- Đáp ứng biên độ của 1 hệ thống số là 1 đại lượng đặc trưng cho hệ thống về sự thay đổi biên độ của các thành phần tần số khi đi qua hệ thống
+	- Đáp ứng pha của 1 hệ thống số là 1 đại lượng đặc trưng cho hệ thống về sự thay đổi góc pha của các thành phần tần số khi đi qua hệ thống
+==========> HỆ THỐNG SỐ CÓ KHẢ NĂNG ĐIỀU CHỈNH THÀNH PHẦN TẦN SỐ
+		Thành phần tần số nào muốn tăng cường thì ta chọn R(ω0) lớn, ngược lại chọn R(ω0) bé đi
+				Nếu ko cho đi qua, chọn R(ω0) =0 ==========> HỆ THỐNG NÀY GỌI LÀ "BỘ LỌC SỐ"
+		Đáp ứng pha đóng vai trò như thời gian trễ - thời gian để hệ thống xử lý tín hiệu này
+
+2, Đáp ứng tần số của hệ thống 
+
+
+H(ω) =	 Σ         h(n). e^(-j.ω.n)
+	  (n=-∞ -> ∞)   
+
+H(ω) được gọi là dáp ứng tần số của hệ thống, là đại lượng đặc trưng cho hệ thống về sự thay đổi biên độ và góc pha của các thành phần tần số khi đi qua hệ thống
+	(Frequency Response)
+
+	H(ω) = R(ω) . e^(j.φ(ω))
+
+		R(ω) =  |H(ω)|
+		φ(ω) = arg[H(ω)]
+
+              pi
+h(n) = 1/2pi  ∫ H(ω). e^(j.ω.n) .dω
+             -pi
+
+3, Mối quan hệ giữa phép biến đổi Z và phép biến đổi Fourier
+		
+
+		H(Z) =      Σ         h(n). z^(-n)        ,Rh- < |z| <Rh+
+	             (n=-∞ -> ∞)
+
+
+
+		H(ω) =	 Σ         h(n). e^(-j.ω.n)
+	             (n=-∞ -> ∞)   
+
+           H(ω) = H(Z) |
+                       |
+                       | Z = e^(-j.ω.n)
+
+
+======================> Nhận xét: 
+					- Biến đổi Fourier chính là biến đổi Z khi ta xét Z nằm trên đường tròn đơn vị
+							Biến đổi Fourier là 1 trường hợp riêng của biến đổi Z và mỗi điểm Z trên đường tròn đơn vị phản ánh 1 thành phần tần số ω
+					- Biến đổi Z có miên hội tụ (ROC) nên biến đổi Fourier chỉ tồn tại khi đường tròn đơn vị nằm trong miền hội tụ
+								Vì hệ thống có MHT chứa đường tròn đơn vị là ổn định nên H(ω) tồn tại với hệ thống ỔN ĐỊNH
+								Mọi hệ thống đang sử dụng đều ổn định, nên chúng ta có thể dùng biến đổi Fourier để khảo sát các hệ thống đang có 
+
+
+*** BÀI TẬP: ( !!!!!!!!!!!  SẼ CHO THI CUỐI KỲ !!!!!!!!!!!!!)
+
+		y(n) - 1/2 . y(n-1) = x(n)    (hệ nhân quả)
+		x(n) = 3 cos(n.pi/2) ------> y(n) =?
+Giải: 
+	y(n) - 1/2 . y(n-1) = x(n)   
+===> Y(Z) -1/2 . Z^-1 . Y(Z) = X(Z)
+
+====> H(Z) = Y(Z)/X(Z) = 1/(1- 1/2 . Z^-1)  = Z/(Z - 1/2)
+
+Thay Z = e^(-j.ω.n)
+	
+		H(ω) = e^(j.ω) /(e^(j.ω) - 1/2)
+Khảo sát tại ω = pi/2
+		H(ω), tại ω = pi/2 = e^(j.pi/2) / (e^(j.pi/2) - 1/2)
+					   = ( cos(pi/2) + j.sin(pi/2) ) / ( cos(pi/2) + j.sin(pi/2) -1/2)
+					   = j / (j - 1/2)
+						
+					   = ( j.(j + 1/2) ) /( (j - 1/2).(j + 1/2) ) = (j^2 + 1/2 .j) / (j^2 - 1/4)
+					   = ( -1 + 1/2 . j) / (-5/4) = 4/5 - 2/5 . j	
+
+		====> R(pi/2) = |H(ω)| tại ω=pi/2 = sqrt( (4/5)^2 + (-2/5)^2 ) =2/sqrt(5)            (Độ dài vector trên miền ảo Re-Im)
+			φ(pi/2) = 	arg( |H(ω)| tại ω=pi/2 ) = -arctan (2/5 / 4/5 )
+									   = -0.463				              (Góc vector )
+
+			y(n) = 2/sqrt(5) . cos (pi/2 .n -0.463)
+
+**** NHẬN XÉT: Hệ thống làm suy giảm biên độ giảm góc....
+
+
+
+

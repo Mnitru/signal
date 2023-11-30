@@ -1,0 +1,133 @@
+			 	THIẾT KẾ BỘ LỌC SỐ  
+I, Nguyên lý
+- Mục tiêu
+	+ Đầu vào: Số tham số của bộ lọc N
+			Các tham số miền tần số: wP, wS, δ1, δ2
+			Điều kiện pha tuyến tính: φ(ω) = 	alpha.ω +beta     ,Tô_g(ω) = alpha (const)
+	+ Đầu ra: N tham số của PTSP (cũng là các mẫu trong đáp ứng xung của hệ thống)
+			h(0), h(1), ..., h(N-1)
+
+
+
+-Nguyên lý 
+	+ Xem xét điều kiện pha tuyến tính trước,
+			---> Biết được đáp ứng xung thỏa mãn điều kiện j
+	+ Sau đó tìm trong các đáp ứng xung thỏa mãn điều kiện trên
+			---> Tìm đáp ứng xung thỏa mãn các điều kiện liên quan đến đáp ứng biên độ
+
+II, Xét điều kiện pha tuyến tính 
+	h(n) --- FT ---> H(ω) = |H(ω)|. e^(j.arg(H(ω)) = R(ω) . e^(j.φ(ω))
+
+		---> φ(ω) = - alpha.ω + beta    (φ(ω) tuyến tính)
+				----> alpha = - d(φ(ω)) / dω
+
+* NHẬN XÉT: Nếu chúng ta tìm ra alpha thì đây là thời gian trễ nhóm 
+1, Xét beta = 0 
+	φ(ω) = -alpha.ω
+
+	H(ω) =  Σ      h(n) .e^(-j.ω.n) =   Σ      h(n) ( cos(ω.n) - j.sin(ω.n) )               
+		(n=0 -> N-1 )   			  (n=0 -> N-1 )        
+
+		=  Σ      h(n).cos(ω.n)  -  j.Σ     h(n).sin(ω.n) )               
+		(n=0 -> N-1 )               (n=0 -> N-1 )
+		 -----------------------    ------------------------
+				|					|
+				|					|
+				|					|		
+				v					v
+			    Real				   Imaginary
+
+H(ω) = R(ω) . e^(j.φ(ω)) = R(ω) . e^(-j.alpha.ω)
+     = R(ω)[ cos(alpha.ω) - j.sin(alpha.ω)
+
+         {	R(ω).cos(alpha.ω) =  Σ      h(n).cos(ω.n) 
+=======> {				   (n = 0 -> N-1) 
+         {
+         { R(ω).sin(alpha.ω) = Σ      h(n).sin(ω.n)
+         { 			   (n = 0 -> N-1)
+
+====>        Σ h(n).cos(ω.n)       Σ h(n).sin(ω.n)
+	R(ω) = ----------------- = -----------------
+		     cos(ω.n)              sin(ω.n)
+
+
+Điều kiện 1: Ta thấy h(n) phải đối xứng
+Điều kiện 2: Ta ra hệ số trễ theo mẫu 
+		====>{ h(n) = h(N-1-n)  dk1
+                { alpha = (N-1)/2  dk2
+					{N lẻ -> FIR loại 1
+					{N chẫn -> FIR loại 2
+
+VD: FIRR loại 1, N=5  //  月2 日 10  2023 年  //
+
+h(n)                         3
+đối xứng	             2    |    2
+                   1    |    |    |   1
+                   |    |    |    |   | 
+                   |    |    |    |   |
+			----------------------------> n 
+                   0    1    2    3   4
+
+Kèm theo đk alpha = (5-1)/2 =2 --> KT hệ thống thỏa mãn 
+			.........
+	
+			H(ω) = 0
+	
+
+******** Nếu pha của ω có dạng alpha.ω +beta, beta =0, thì đáp ứng xung có dạng đối xứng và alpha = (N-1)/2
+			Với N lẻ, ta có bộ lọc FIR loại 1 
+			    N chẵn, ta có bộ lọc FIR loại 2		
+
+       beta != 0, h(n) phản đối xứng
+		{ h(n) = -h(N-1-n)            (3)
+		{alpha = (N-1)/2 = +- pi/2    (4)   
+Từ đó người ta phân chia bộ lọc FIR có pha tuyến tính thành 4 loại như sau:
+		- h(n) đối xứng, N lẻ
+		- h(n) đối xứng, N chẵn
+		- h(n) phản đối xứng, N lẻ 
+		- h(n) phản đối xứng, N chẵn
+
+
+III, Đặc điểm và ứng dụng của từng bộ lọc FIR
+1, Bộ lọc FIR loại I h(n) đối xứng, N lẻ 
+VD Xét N = 5
+Đầu ra của hệ thống :y(n)....
+Đáp ứng tần số H(ω) = h(0)  + h(1).e^(-j.ω) +h(2).e^(-j.2.ω) + h(1).e^(-j.3.ω) +  h(0).e^(-j.4.ω)
+			   = h(0)[1 +e^(-j.4.ω)] + h(1)[e^(-j.ω) +e^(-j.3.ω)] + h(2).e^(-j.2.ω)
+			   = h(0)[e^(j.2.ω) + e^(-j.2.ω)]e^(-j.2.ω) + h(1)[e^(j.ω) + e^(-j.ω)]e^(-j.2.ω) +h(2).e^(-j.2.ω)
+			   = [ h(0).cos(2ω) + h(1)cos(ω) +h(2)].e^(-j.2.ω)
+
+		H(ω) = R(ω).e^(j.φ(ω)) = R(ω).e^(j.alpha.ω) = R(ω).e^(j.2.ω)
+
+      { R(ω) = 2h(0) .cos(2ω) + 2h(1)cos(ω) + h(2)
+=====>{
+      { φ(ω) = -2ω
+
+	Thời gian trễ theo mẫu Tô_g(ω) = d(φ(ω))/dω = 2 ( mẫu) 
+	Thời gian trẽ theo giây  = 2 . Ts
+
+
+*****Bộ lọc FIR loại 1 có thời gian trễ luôn là số nguyên lần lây mẫu ( k nhỏ hơn) 
+     Bộ lọc FIR loại 2 
+		có thể xây dựng hệ thống có thời gian trễ có độ chính xác Ts/2
+     Để xem 1 hệ thống FIR loại 1234 có thể xây dựng đc bộ lọc loại nào, 
+		ta phải đánh giá đáp ứng biên độ của hệ thống đó tại các tần số ω=0, ω=pi
+VD: Nếu |H(ω)| tại ω=0 mà !=0, thì ko thể xây dựng được HPF, BPF
+    Nếu |H(ω)| tại ω=0 mà =0, thì ko thể xây dựng được LPF, BSF
+		(Check the 写真）
+＊Tổng kết: Bộ lọc FIR loại 1 có thể dùng để thiết kế các bộ lọc 
+		Thời gian trễ bộ lọc luôn bằng số nguyên lần chu kỳ lấy mẫu 
+
+2, Bộ lọc FIR loại 2
+	(Check the 写真 - 17/2/23）
+	Thời gian trễ theo giây: alpha.Ts = (N-1)/Ts
+	Cho phép xây dựng bộ lọc có độ trễ chính xác đến 1 nửa chu kỳ lấy mẫu
+
+	Không thể thiết kế được bộ lọc thông cao hay bộ lọc chắn dải
+		(Xét điều kiện của R(ω) tại ω=0,pi {trong 写真} )
+
+3, Bộ lọc FIR loại 3
+	Không dùng để xây dựng bộ lọc thông thấp, bộ lọc thông cao, và chắn dải 
+4, Bộ lọc FIR loại 4
+	Không dùng để xây dựng bộ lọc thống thấp, chắn dải
+
